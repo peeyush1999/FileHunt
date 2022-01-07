@@ -97,7 +97,8 @@ void normal()
         {
             strcpy(currentDir,getenv("HOME"));
             //strcpy(currentDir,root);
-            listDir(root);
+            updatePathStack(currentDir);
+            listDir(currentDir);
         }
         else if(num==68)//left
         {

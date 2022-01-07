@@ -3,6 +3,8 @@
 
 void rename(vector<string> token)
 {
+
+    chdir(currentDir);
     string oldName=token[1];
     string newName=token[2];
     
@@ -46,6 +48,7 @@ void rename(vector<string> token)
 
 void move(vector<string> token)
 {
+    chdir(currentDir);
     int len = token.size();
     string dest=token[token.size()-1];
     string homedir = getenv("HOME");
@@ -143,6 +146,7 @@ void move(vector<string> token)
 
 void gotoDir(vector<string> token)
 {
+    chdir(currentDir);
     string dest=token[1];
     string cd(currentDir);
     string homedir = getenv("HOME");
@@ -184,6 +188,7 @@ void gotoDir(vector<string> token)
 
 void createFile(vector<string> token)
 {
+    chdir(currentDir);
     string dest=token[2];
     string homedir = getenv("HOME");
 
@@ -230,6 +235,7 @@ void createFile(vector<string> token)
 
 void makeDir(vector<string> token)
 {
+    chdir(currentDir);
     string dest=token[2];
     string homedir = getenv("HOME");
 
@@ -275,6 +281,7 @@ void makeDir(vector<string> token)
 }
 void deleteFile(vector<string> token)
 {
+    chdir(currentDir);
     string dest=token[2];
     string homedir = getenv("HOME");
 
@@ -310,6 +317,7 @@ void deleteFile(vector<string> token)
 
 void deleteHelper(string path)
 {
+    chdir(currentDir);
     int n;
     struct dirent **list=NULL;
     n = scandir(path.c_str(), &list, NULL, alphasort);
@@ -338,6 +346,7 @@ void deleteHelper(string path)
 }
 void deleteDir(vector<string> token)
 {
+    chdir(currentDir);
     string dest=token[2];
     string homedir = getenv("HOME");
 
@@ -389,6 +398,7 @@ void deleteDir(vector<string> token)
 
 void copyHelper(string path,string newPath)
 {
+    chdir(currentDir);
     int n;
     struct dirent **list=NULL;
     myfile<<" Scanning : "<<path<<endl;
@@ -470,6 +480,7 @@ void copyHelper(string path,string newPath)
 }
 void copyDir(vector<string> token)
 {
+    chdir(currentDir);
     int len = token.size();
     string dest=token[token.size()-1];
     string homedir = getenv("HOME");
@@ -510,7 +521,9 @@ void copyDir(vector<string> token)
 
         char f_path[256]; 
         realpath(f.c_str(), f_path); 
-        //myfile<<"@@@@@@@@@@@ copy this file    "<<f_path<<endl;
+        myfile<<"@@@@@@@@@@@ copy this file ----   "<<f<<endl;
+        myfile<<"@@@@@@@@@@@ copy this file    "<<f_path<<endl;
+        myfile<<stat(f_path,&two)<<endl;
         if(stat(f_path,&two)==0)
         {
             //fileList.push_back(f.substr(0, f.find_last_of("/\\")));
